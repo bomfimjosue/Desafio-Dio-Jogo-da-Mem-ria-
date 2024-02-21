@@ -42,6 +42,20 @@ Jogo da Memória
 </script>
 </body>
 </html>
+const flipSound = new Audio('caminho_para_o_seu_arquivo_de_som_flip.mp3');
+const matchSound = new Audio('caminho_para_o_seu_arquivo_de_som_match.mp3');
+
+function playFlipSound() {
+  flipSound.play();
+}
+
+function playMatchSound() {
+  matchSound.play();
+}
+
+// Chame playFlipSound() quando uma carta for virada
+// Chame playMatchSound() quando um par for encontrado
+
 document.addEventListener('DOMContentLoaded', () => {
   const memoryGame = document.querySelector('.memory-game');
   const emojis = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇'];
@@ -187,6 +201,17 @@ function incrementMoves() {
 }
 
 // Lembre-se de chamar incrementMoves dentro da função flipCard
+let score = 0;
+const scoreDisplay = document.createElement('div');
+scoreDisplay.classList.add('score');
+document.body.insertBefore(scoreDisplay, document.body.firstChild);
+
+function calculateScore() {
+  score = 1000 - (moves * 10 + time * 2); // Exemplo de cálculo de pontuação
+  scoreDisplay.textContent = `Pontuação: ${score}`;
+}
+
+// Chame calculateScore() dentro de checkEndOfGame
 
 function startTimer() {
   setInterval(() => 
